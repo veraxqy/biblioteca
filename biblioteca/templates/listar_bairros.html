@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %} Bairros {% endblock title %}
+{% block content %}
+<div class="container-xxl flex-grow-1">
+
+    <div class="card my-3">
+      <h5 class="card-header">Pesquisar</h5>
+      <form method="get" class="form-control">
+        {{ bairro_list.form }}
+        <input type="submit" value="Pesquisar" class="btn btn-primary">
+      </form>
+    </div>
+    <!-- Base da Tabela -->
+    <div class="card my-3">
+      <h5 class="card-header">Bairros</h5>
+      
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Cód. Bairro</th>
+              <th>Nome</th>
+              <th>bairros</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for bairro in bairro_list.qs %}
+            <tr>
+              <td><span class="badge badge-center bg-label-secondary">{{ bairro.id_bairro }}</span></td>
+              <td>{{ bairro.nome_bairro }}</td>
+              <td>{{ bairro.id_cidade_bairro }}</td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                    <i class="bx bx-dots-vertical-rounded"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'url_update_bairro' bairro.id_bairro %}"
+                      ><i class="bx bx-edit-alt me-1"></i> Editar</a
+                    >
+                    <a class="dropdown-item" href="{% url 'url_delete_bairro' bairro.id_bairro %}"
+                      ><i class="bx bx-trash me-1"></i> Deletar</a
+                    >
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/ Base da Tabela -->
+    <a href="{% url 'url_criar_bairros' %}" class="btn btn-primary">+ Adicionar novo bairro</a>
+</div>
+{% endblock content %}

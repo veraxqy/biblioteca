@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} Funcionários {% endblock title %}
+{% block content %}
+<div class="container-xxl flex-grow-1">
+
+    <div class="card my-3">
+      <h5 class="card-header">Pesquisar</h5>
+      <form method="get" class="form-control">
+        {{ funcionario_list.form }}
+        <input type="submit" value="Pesquisar" class="btn btn-primary">
+      </form>
+    </div>
+    <!-- Base da Tabela -->
+    <div class="card my-3">
+      <h5 class="card-header">Funcionários</h5>
+      
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Cód. Func.</th>
+                <th>Nome</th>
+                <th>Dta. de Nasc.</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Número</th>
+                <th>Logradouro</th>
+                <th>Bairro</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for funcionario in funcionario_list.qs %}
+            <tr>
+                <td><span class="badge badge-center bg-label-secondary">{{ funcionario.id_funcionario}}</span></td>
+                <td>{{ funcionario.nome_funcionario}}</td>
+                <td>{{ funcionario.dta_nasc_funcionario}}</td>
+                <td>{{ funcionario.telefone_funcionario}}</td>
+                <td>{{ funcionario.email_funcionario}}</td>
+                <td>{{ funcionario.numero_funcionario}}</td>
+                <td>{{ funcionario.logradouro_funcionario}}</td>
+                <td>{{ funcionario.id_bairro_funcionario}}</td>  
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                    <i class="bx bx-dots-vertical-rounded"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'url_update_funcionario' funcionario.id_funcionario %}"
+                      ><i class="bx bx-edit-alt me-1"></i> Editar</a
+                    >
+                    <a class="dropdown-item" href="{% url 'url_delete_funcionario' funcionario.id_funcionario %}"
+                      ><i class="bx bx-trash me-1"></i> Deletar</a
+                    >
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/ Base da Tabela -->
+    <a href="{% url 'url_criar_funcionarios' %}" class="btn btn-primary">+ Adicionar novo funcionário</a>
+</div>
+{% endblock content %}

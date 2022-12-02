@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} Livros {% endblock title %}
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <div class="card my-3">
+      <h5 class="card-header">Pesquisar</h5>
+      <form method="get" class="form-control">
+        {{ livro_list.form }}
+        <input type="submit" value="Pesquisar" class="btn btn-primary">
+      </form>
+    </div>
+    <!-- Base da Tabela -->
+    <div class="card my-3">
+      <h5 class="card-header">Livros</h5>
+      
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Cód. Livro</th>
+                <th>Título</th>
+                <th>Editora</th>
+                <th>Autor(a)</th>
+                <th>Dta. Publicação</th>
+                <th>Qtd. Páginas</th>
+                <th>Gênero</th>
+                <th>Estado Físico</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for livro in livro_list.qs %}
+            <tr>
+                <td><span class="badge badge-center bg-label-secondary">{{ livro.id_livro }}</span></td>
+                <td>{{ livro.titulo_livro }}</td>
+                <td>{{ livro.editora_livro }}</td>
+                <td>{{ livro.autor_livro }}</td>
+                <td>{{ livro.dta_publicacao_livro }}</td>
+                <td>{{ livro.qtd_paginas_livro }}</td>
+                <td>{{ livro.id_genero_livro }}</td>
+                <td>{{ livro.id_est_fisico_livro }}</td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                    <i class="bx bx-dots-vertical-rounded"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'url_update_livro' livro.id_livro %}"
+                      ><i class="bx bx-edit-alt me-1"></i> Editar</a
+                    >
+                    <a class="dropdown-item" href="{% url 'url_delete_livro' livro.id_livro %}"
+                      ><i class="bx bx-trash me-1"></i> Deletar</a
+                    >
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/ Base da Tabela -->
+    <a href="{% url 'url_criar_livros' %}" class="btn btn-primary">+ Adicionar novo usuário</a>
+</div>
+{% endblock content %}

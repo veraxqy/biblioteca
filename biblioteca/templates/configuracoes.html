@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Configurações {% endblock title %}
+{% block content %}
+<div class="container-xxl flex-grow-1">
+    <h4 class="fw-bold py-3 mb-4">Configurações</h4>
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-pills flex-column flex-md-row mb-3 gap-3">
+          <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'url_listar_cidades' %}">Cidades</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'url_listar_bairros' %}">Bairros</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'url_listar_generos' %}">Gêneros</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'url_listar_estfisicos' %}">Estados Físicos</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} Usuários {% endblock title %}
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <div class="card my-3">
+      <h5 class="card-header">Pesquisar</h5>
+      <form method="get" class="form-control">
+        {{ usuario_list.form }}
+        <input type="submit" value="Pesquisar" class="btn btn-primary">
+      </form>
+    </div>
+    <!-- Base da Tabela -->
+    <div class="card my-3">
+      <h5 class="card-header">Usuários</h5>
+      
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Cód. Usuário</th>
+                <th>Nome</th>
+                <th>Dta. de Nascimento</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Número</th>
+                <th>Logradouro</th>
+                <th>Bairro</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for usuario in usuario_list.qs %}
+            <tr>
+                <td><span class="badge badge-center bg-label-secondary">{{ usuario.id_usuario }}</span></td>
+                <td>{{ usuario.nome_usuario }}</td>
+                <td>{{ usuario.dta_nasc_usuario }}</td>
+                <td>{{ usuario.telefone_usuario }}</td>
+                <td>{{ usuario.email_usuario }}</td>
+                <td>{{ usuario.numero_usuario }}</td>
+                <td>{{ usuario.logradouro_usuario }}</td>
+                <td>{{ usuario.id_bairro_usuario }}</td>  
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                    <i class="bx bx-dots-vertical-rounded"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'url_update_usuario' usuario.id_usuario %}"
+                      ><i class="bx bx-edit-alt me-1"></i> Editar</a
+                    >
+                    <a class="dropdown-item" href="{% url 'url_delete_usuario' usuario.id_usuario %}"
+                      ><i class="bx bx-trash me-1"></i> Deletar</a
+                    >
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/ Base da Tabela -->
+    <a href="{% url 'url_criar_usuarios' %}" class="btn btn-primary">+ Adicionar novo usuário</a>
+</div>
+{% endblock content %}

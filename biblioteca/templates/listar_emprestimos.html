@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %} Empréstimos {% endblock title %}
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <div class="card my-3">
+      <h5 class="card-header">Pesquisar</h5>
+      <form method="get" class="form-control">
+        {{ emprestimo_list.form }}
+        <input type="submit" value="Pesquisar" class="btn btn-primary">
+      </form>
+    </div>
+    <!-- Base da Tabela -->
+    <div class="card my-3">
+      <h5 class="card-header">Empréstimos</h5>
+      
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Cód. Empréstimo</th>
+              <th>Livro</th>
+              <th>Dta. Empréstimo</th>
+              <th>Dta. Devolção</th>
+              <th>Usuário</th>
+              <th>Funcionário</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for emprestimo in emprestimo_list.qs %}
+            <tr>
+              <td><span class="badge badge-center bg-label-secondary">{{ emprestimo.id_emprestimos }}</span></td>
+              <td>{{ emprestimo.id_livro_emprestimos }}</td>
+              <td>{{ emprestimo.dta_emprestimo }}</td>
+              <td>{{ emprestimo.dta_devolucao }}</td>
+              <td>{{ emprestimo.id_usuario_emprestimos }}</td>
+              <td>{{ emprestimo.id_funcionario_emprestimos }}</td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                    <i class="bx bx-dots-vertical-rounded"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'url_update_emprestimo' emprestimo.id_emprestimos %}"
+                      ><i class="bx bx-edit-alt me-1"></i> Editar</a
+                    >
+                    <a class="dropdown-item" href="{% url 'url_delete_emprestimo' emprestimo.id_emprestimos %}"
+                      ><i class="bx bx-trash me-1"></i> Deletar</a
+                    >
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/ Base da Tabela -->
+    <a href="{% url 'url_criar_emprestimos' %}" class="btn btn-primary">+ Adicionar novo empréstimo</a>
+</div>
+{% endblock content %}

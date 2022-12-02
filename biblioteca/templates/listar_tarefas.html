@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %} Tarefas {% endblock title %}
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <!-- Base da Tabela -->
+    <div class="card my-3">
+      <h5 class="card-header">Tarefas</h5>
+      
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Cód. Tarefa</th>
+                <th>Situação</th>
+                <th>Descrição</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for tarefa in tarefa %}
+            <tr>
+                <td><span class="badge badge-center bg-label-secondary">{{ tarefa.id_tarefa }}</span></td>
+                <td>{{ tarefa.situacao_tarefa}}</td>
+                <td>{{ tarefa.descricao_tarefa }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/ Base da Tabela -->
+    <a href="{% url 'url_criar_tarefa' %}" class="btn btn-primary">+ Adicionar nova tarefa</a>
+</div>
+{% endblock content %}

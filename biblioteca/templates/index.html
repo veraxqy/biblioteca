@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %} Página Inicial {% endblock title %}
+{% block content %}
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <div class="row">
+
+        <div class="col-md mb-4 mb-md-0">
+            <div class="card">
+              <h5 class="card-header">Avisos!</h5>
+              <div class="card-body">
+
+                <div class="alert alert-success" role="alert">153 Empréstimo(s) concluído(s)</div>
+
+                <div class="alert alert-danger" role="alert">7 Empréstimo(s) para conclusão nos próximos dias</div>
+
+                <div class="alert alert-warning" role="alert">3 Empréstimo(s) para conclusão hoje!</div>
+
+                <div class="alert alert-info" role="alert">5 Atualizações</div>
+
+              </div>
+            </div>
+          </div>
+
+        <div class="col-md">
+            <div class="card">
+                <!-- List group checkbox -->
+            <h5 class="card-header">CheckList Semanal:</h5>
+            
+            <div class="card-body demo-inline-spacing">
+              <div class="list-group">
+                {% for tarefa in tarefa %}
+                <label class="list-group-item">
+                  <input class="form-check-input me-1" type="checkbox" value="" />
+                  {{ tarefa.situacao_tarefa }}
+                  {{ tarefa.descricao_tarefa }}
+                </label>
+                {% endfor %}
+              </div>
+              <a href="{% url 'url_criar_tarefa' %}" class="btn btn-primary">+ Adicionar</a>
+            </div>
+          <!--/ List group checkbox -->
+            </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- / Content -->
+
+    <div class="content-backdrop fade"></div>
+  </div>
+  <!-- Content wrapper -->
+{% endblock content %}
